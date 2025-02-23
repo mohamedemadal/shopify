@@ -53,8 +53,5 @@ export default {
         icon: 'settings',
       },
     },
-
-    
-
   ] as INavigationRoute[],
 }

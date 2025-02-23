@@ -5,7 +5,7 @@
   import { useToast } from 'primevue/usetoast'
   import axios from 'axios'
   const router = useRouter()
-  const value = ref(null);
+  const value = ref(null)
   const toast = useToast()
   import { useRouter } from 'vue-router'
   const products = ref(null)
@@ -14,12 +14,10 @@
   const error = ref('')
   const users = ref(null)
   const rate = ref({
-    tourist_rating:Number,
-    reviewable_id:'',
-    type:0
-
-
-})
+    tourist_rating: Number,
+    reviewable_id: '',
+    type: 0,
+  })
   const productDialog = ref(false)
   const deleteDialog = ref(false)
   const rateDialog = ref(false)
@@ -42,19 +40,19 @@
   })
 
   const fetchData = () => {
-    axios.post('https://api.dataforseo.com/v3/dataforseo_labs/google/ranked_keywords/live', {
-      data: {
-         "target": "dataforseo.com",
-        "date_from": "2020-01-01",
-      "date_to": "2021-01-01"
-        
-        }
-    },
-    ).then((res) => {
-      loading.value=false
+    axios
+      .post('https://api.dataforseo.com/v3/dataforseo_labs/google/ranked_keywords/live', {
+        data: {
+          target: 'dataforseo.com',
+          date_from: '2020-01-01',
+          date_to: '2021-01-01',
+        },
+      })
+      .then((res) => {
+        loading.value = false
 
-      console.log(res.data.tasks[0].result[0].metrics.organic)
-    })
+        console.log(res.data.tasks[0].result[0].metrics.organic)
+      })
   }
   const active = (data) => {
     loading.value = true
@@ -79,17 +77,16 @@
     })
   }
   const rateValue = () => {
-
-
-    axios.post(`/api/rating/create-admin`,rate.value).then((res) => {
-
-      fetchData()
-      toast.add({ severity: 'success', summary: 'Successful', detail: 'rate send', life: 3000 })
-      deleteDialog.value= !(deleteDialog.value)
-
-    }).catch((el)=>{
-      error.value = el.response.data.errors
-    })
+    axios
+      .post(`/api/rating/create-admin`, rate.value)
+      .then((res) => {
+        fetchData()
+        toast.add({ severity: 'success', summary: 'Successful', detail: 'rate send', life: 3000 })
+        deleteDialog.value = !deleteDialog.value
+      })
+      .catch((el) => {
+        error.value = el.response.data.errors
+      })
   }
 
   onMounted(() => {
@@ -164,34 +161,29 @@
   }
 
   const confirmDelete = (id) => {
-     error.value = ref('')
-    rate.value.reviewable_id=id
+    error.value = ref('')
+    rate.value.reviewable_id = id
 
     deleteDialog.value = true
   }
-  const position = ref('bottom');
-const positions = ref([
+  const position = ref('bottom')
+  const positions = ref([
     {
-
-        value: 1
+      value: 1,
     },
     {
-
-        value: 2
+      value: 2,
     },
     {
-
-        value:3
+      value: 3,
     },
     {
-
-        value: 4
+      value: 4,
     },
     {
-
-        value: 5
-    }
-]);
+      value: 5,
+    },
+  ])
   const deleteAction = () => {
     axios
       .delete(`/api/users/${user.value.id}/delete`)
@@ -250,31 +242,31 @@ const positions = ref([
     <div class="col-12">
       <va-card class="card">
         <Toolbar class="mb-4">
-            <template #start>
-              <div class="my-2">
-                <Button label="New" icon="pi pi-plus" class="new mr-2" />
-  <!--              <Button-->
-  <!--                label="Delete"-->
-  <!--                icon="pi pi-trash"-->
-  <!--                class="p-button-danger"-->
-  <!--                :disabled="!selectedProducts || !selectedProducts.length"-->
-  <!--                @click="confirmDeleteSelected"-->
-  <!--              />-->
-              </div>
-            </template>
+          <template #start>
+            <div class="my-2">
+              <Button label="New" icon="pi pi-plus" class="new mr-2" />
+              <!--              <Button-->
+              <!--                label="Delete"-->
+              <!--                icon="pi pi-trash"-->
+              <!--                class="p-button-danger"-->
+              <!--                :disabled="!selectedProducts || !selectedProducts.length"-->
+              <!--                @click="confirmDeleteSelected"-->
+              <!--              />-->
+            </div>
+          </template>
 
-            <template #end>
-  <!--            <FileUpload-->
-  <!--              mode="basic"-->
-  <!--              accept="image/*"-->
-  <!--              :max-file-size="1000000"-->
-  <!--              label="Import"-->
-  <!--              choose-label="Import"-->
-  <!--              class="mr-2 inline-block"-->
-  <!--            />-->
-              <Button label="Export" icon="pi pi-upload" class="new" @click="exportCSV($event)"/>
-            </template>
-          </Toolbar>
+          <template #end>
+            <!--            <FileUpload-->
+            <!--              mode="basic"-->
+            <!--              accept="image/*"-->
+            <!--              :max-file-size="1000000"-->
+            <!--              label="Import"-->
+            <!--              choose-label="Import"-->
+            <!--              class="mr-2 inline-block"-->
+            <!--            />-->
+            <Button label="Export" icon="pi pi-upload" class="new" @click="exportCSV($event)" />
+          </template>
+        </Toolbar>
 
         <Toast />
 
@@ -341,7 +333,6 @@ const positions = ref([
             </template>
           </Column>
 
-
           <Column
             field="email_verified"
             header="Email Verified"
@@ -349,16 +340,13 @@ const positions = ref([
             header-style="width:14%; min-width:10rem;"
             class="m-auto"
           >
-
             <template #body="slotProps">
-          <div class="m-auto text-center">
-            <i class="pi pi-times-circle text-red-400 h-6" v-if="slotProps.data?.email_verified == 'Not Yet'"></i>
-              <i class="pi pi-check-circle text-green-500" v-if="slotProps.data?.email_verified != 'Not Yet'"></i>
+              <div class="m-auto text-center">
+                <i class="pi pi-times-circle text-red-400 h-6" v-if="slotProps.data?.email_verified == 'Not Yet'"></i>
+                <i class="pi pi-check-circle text-green-500" v-if="slotProps.data?.email_verified != 'Not Yet'"></i>
               </div>
-
             </template>
           </Column>
-
 
           <Column header-style="min-width:10rem;">
             <template #body="slotProps">
@@ -380,7 +368,7 @@ const positions = ref([
                 <Button
                   :icon="slotProps.data.status == 0 ? 'pi pi-check' : 'pi pi-times'"
                   class="new mr-2"
-                  style="border-radius: 50% !important;"
+                  style="border-radius: 50% !important"
                   :class="slotProps.data.status == 0 ? 'p-button-success' : 'p-button-danger'"
                   @click="changeStatus(slotProps.data)"
                 />
@@ -390,12 +378,7 @@ const positions = ref([
           <Column header-style="min-width:10rem;">
             <template #body="slotProps">
               <div>
-                <Button
-
-                        label="show"
-                        class="pop  mr-2"
-                        :class=" 'p-button-danger'"
-                        @click="show(slotProps.data.id)"/>
+                <Button label="show" class="pop mr-2" :class="'p-button-danger'" @click="show(slotProps.data.id)" />
               </div>
             </template>
           </Column>
@@ -492,10 +475,10 @@ const positions = ref([
         </Dialog>
 
         <Dialog v-model:visible="deleteDialog" :style="{ width: '450px' }" header="rate" :modal="true">
-              <div class="m-auto">
-                 <Rating class="m-auto" v-model="rate.tourist_rating" :stars="5" :cancel="false" />
-              </div>
-              <div class="mt-4 m-auto text-red-500" v-if="error?.tourist_rating">{{ error.tourist_rating[0] }}</div>
+          <div class="m-auto">
+            <Rating class="m-auto" v-model="rate.tourist_rating" :stars="5" :cancel="false" />
+          </div>
+          <div class="mt-4 m-auto text-red-500" v-if="error?.tourist_rating">{{ error.tourist_rating[0] }}</div>
           <template #footer>
             <Button label="send" icon="pi pi-check" class="m-auto" @click="rateValue" />
           </template>

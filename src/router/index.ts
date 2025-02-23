@@ -12,14 +12,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/:catchAll(.*)',
     redirect: { name: 'project' },
   },
-  
+
   {
-    
     name: 'admin',
     path: '/admin',
     component: AppLayout,
     children: [
-     {
+      {
         name: 'project',
         path: 'project',
         component: () => import('../pages/admin/project/index.vue'),

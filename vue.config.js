@@ -1,6 +1,5 @@
 module.exports = {
   devServer: {
-    proxy: 'https://api.dataforseo.com/'
-
-  }
+    proxy: 'https://api.dataforseo.com/',
+  },
 }

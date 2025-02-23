@@ -8,12 +8,10 @@
           :color="colors.primary"
           @click="isSidebarMinimized = !isSidebarMinimized"
         />
-        <router-link to="/">
-          
-        </router-link>
+        <router-link to="/"> </router-link>
       </div>
     </template>
-    
+
     <template #right>
       <app-navbar-actions class="app-navbar__actions" :user-name="userName" />
     </template>
